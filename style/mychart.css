@@ -1,0 +1,76 @@
+body{
+    font: 12px/1.5 "Montserrat";
+    margin: 0px;
+    padding: 0px;
+}
+.btn-round{
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.chartContainer{
+    width: 98vw;
+    height: calc(100vh - 5rem);
+}
+
+#header{
+    position: relative;
+    display: none;
+}
+#header div:first-child{
+    position: absolute;    
+}
+#header h1{
+    text-align:center;
+    margin: 0px;
+    padding: 0px;    
+}
+.material-icons{
+    cursor: pointer;
+}
+/* Mobile Portrait */
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #header div:first-child{
+        position: absolute;
+        top:2.5rem;
+    }
+    #header h1{
+        text-align:center;
+        font-size: 7vw;
+        margin: 0px;
+        padding: 0px;    
+    }
+  }
+/* Mobile landscape */
+@media only screen and (min-device-width: 480px) 
+  and (max-device-width: 640px) 
+  and (orientation: landscape) {
+    #header div:first-child{
+        position: absolute;
+        top:4rem;
+        left:0.5rem;
+    }
+    #header h1{
+        text-align:center;
+        font-size: 7vw;
+        margin: 0px;
+        padding: 0px;    
+    }
+}
+
+/* iPad Portrait */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+    #header div:first-child{
+        position: absolute;
+        top:5rem;
+        left:0.5rem;
+    }
+    #header h1{
+        text-align:center;
+        font-size: 7vw;
+        margin: 0px;
+        padding: 0px;    
+    }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>DAMS DASHBOARD (by LLC LLP)</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="style/mychart.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript"  src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js -->
+        <script type="text/javascript" src="js/chartjs-plugin-zoom.js"></script>
+        <script type="text/javascript" src="js/papaparse.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="header">
+        <div>            
+            <span class="material-icons" title="Download plotting" onclick="downloadImage()">
+                file_download
+                </span>
+            <span class="material-icons" title="Reset zoom" onclick="resetZoom()">
+                reset_tv
+                </span>            
+        </div>
+        <div>
+            <h1 id="damname">Dame name</h1>
+        </div>
+        </div>
+        <div class="chartContainer">
+            <canvas id="myChart"></canvas>
+          </div>
+        <script type="text/javascript" src="js/mychart.js"></script>
+    </body>
+</html>
