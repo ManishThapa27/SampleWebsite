@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/y8qrsopysnzs/public_html/
+    - export DEPLOYPATH=/home/y8qrsopysnzs/public_html/react.floodrisks.in/
     - /bin/cp -a * $DEPLOYPATH
