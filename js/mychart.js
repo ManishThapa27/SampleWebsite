@@ -45,7 +45,7 @@ const data = {
 };
 
 const config = {
-  type: 'bar',
+  type: 'line',
   data: data,
   maintainAspectRatio: true,
   options: {
