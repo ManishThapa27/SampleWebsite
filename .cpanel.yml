@@ -2,4 +2,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/y8qrsopysnzs/public_html/react.floodrisks.in/
+    - /bin/rm -Rf $DEPLOYPATH
+    - /bin/mkdir $DEPLOYPATH
     - /bin/cp -a * $DEPLOYPATH
