@@ -313,7 +313,7 @@ function configureDams() {
       + "<b>Dam Type: </b>" + layer.feature.properties.Dam_Type + "<br>"
       + "<b>Gross Storage: </b>" + layer.feature.properties.Gross__Sto + "<br>"
       + "<b>Purpose: </b>" + layer.feature.properties.Purpose + "<br>"
-      + "<a target='_blank' href='chart.html?id=" + layer.feature.properties.UID+"&name="+ encodeURIComponent(layer.feature.properties.Name) + "'>Time Series Plotting</a>"
+      + "<a target='_blank' href='chart.html?id=" + layer.feature.properties.UID+"&name="+ encodeURIComponent(layer.feature.properties.Name) + "'>Time Series Visualization</a>"
       + '</p>';
   });
   dams.addTo(map);
@@ -434,7 +434,7 @@ function configureReservior() {
     console.log(layer.feature.properties);
     return "<p><img alt='test' width=240 height=240 src='image/02.jpg'/><br>"
       + "<b>Name: </b>" + layer.feature.properties.name + "<br>"
-      + "<a target='_blank' href='chart.html?id=" + layer.feature.properties.osm_id + "'>Time Series Plotting</a>"
+      + "<a target='_blank' href='chart.html?id=" + layer.feature.properties.osm_id + "'>Time Series Visualization</a>"
       + "</p>";
   });
   reservior.addTo(map);
