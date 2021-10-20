@@ -1,5 +1,24 @@
 var map = L.map('map').setView([22.9734, 78.6569], 6);
 var layerLabeling = [];
+
+//OSM
+const o_std = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+});
+
+//GSI Pale
+const t_pale = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png', {
+    attribution:
+        "<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html' target='_blank'>kikakuchousei</a>",
+});
+
+//GSI Ort
+const t_ort = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/ort/{z}/{x}/{y}.jpg', {
+    attribution:
+        "<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html' target='_blank'>kikakuchousei</a>",
+});
+
+
 // Streets
 // Topographic
 // NationalGeographic
@@ -213,7 +232,10 @@ var overlaysTree = {
         { label: 'Sub Catchment', layer: subCatchment },
         { label: 'Sub Sub Catchment', layer: subsubCatchment },
         { label: 'Waterbody', layer: waterbody },
-        { label: 'Major Catchment', layer: majarCatchment }
+        { label: 'Major Catchment', layer: majarCatchment },
+        { label: 'OSM', layer:o_std},
+        { label: 'GSI Pale', layer:t_pale},
+        { label: 'GSI Ort', layer:t_ort}
       ]
     }
 
@@ -223,7 +245,7 @@ var overlaysTree = {
 if (window.matchMedia("(max-width: 767px)").matches) {
   L.control.layers.tree(baseMaps, overlaysTree).addTo(map);
 } else {
-  L.control.layers.tree(baseMaps, overlaysTree, { collapsed: false, position: 'topright' }).addTo(map);
+  L.control.layers.tree(baseMaps, overlaysTree, { autoZIndex:true, sortLayers:false, collapsed: false, position: 'topright' }).addTo(map);
 }
 
 
@@ -601,3 +623,20 @@ map.addControl(new L.Control.Fullscreen({
 //   lang: "es",
 //   units: "metric"
 // }).addTo(map);
+
+
+//AddLayer
+const Map_AddLayer = {
+  'OSM': o_std,
+  'GSI Pale': t_pale,
+  'GSI Ort': t_ort,
+};
+
+//OpacityControl
+L.control
+    .opacity(Map_AddLayer, {
+        collapsed:true,
+        label: 'Layers Opacity',
+        position: 'bottomleft'
+    })
+    .addTo(map);
