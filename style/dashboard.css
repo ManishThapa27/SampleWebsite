@@ -69,3 +69,15 @@ body {
 .leaflet-control-geocoder{
   height: 44px;
 }
+
+.leaflet-control-measure {  
+  background: #ececec !important;
+}
+
+.leaflet-control-measure-toggle{
+  background-color: #ececec !important;
+}
+
+.leaflet-bar a {
+  background-color: #ececec;
+}

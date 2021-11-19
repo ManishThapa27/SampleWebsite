@@ -3,19 +3,19 @@ var layerLabeling = [];
 
 //OSM
 const o_std = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 });
 
 //GSI Pale
 const t_pale = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png', {
-    attribution:
-        "<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html' target='_blank'>kikakuchousei</a>",
+  attribution:
+    "<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html' target='_blank'>kikakuchousei</a>",
 });
 
 //GSI Ort
 const t_ort = new L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/ort/{z}/{x}/{y}.jpg', {
-    attribution:
-        "<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html' target='_blank'>kikakuchousei</a>",
+  attribution:
+    "<a href='http://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html' target='_blank'>kikakuchousei</a>",
 });
 
 
@@ -63,10 +63,12 @@ var baseMaps ={
   "Topographic": topographicBasemapLayer,
   "USATopo": usaTopoBasemapLayer
 }*/
-var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+
+var OpenTopoMap = L.tileLayer.provider("OpenTopoMap", {
   maxZoom: 17,
   attribution: '&copy; OpenStreetMap contributors, <a href="https://opentopomap.org">OpenTopoMap</a>'
 });
+
 OpenTopoMap.addTo(map)
 // Remove leaflet from attribution
 map.attributionControl.setPrefix('')
@@ -76,8 +78,10 @@ var osmGeocoder = new L.Control.OSMGeocoder({ placeholder: 'Search location...' 
 map.addControl(osmGeocoder);
 
 var imageUrl = 'image/Dindori.png',
-  imageBounds = [[26.72115, 39.9285], [24.38985, 62.7615]];
-// L.imageOverlay(imageUrl, imageBounds).addTo(map);
+  imageBounds = [[19.9734, 73.6569], [24.38985, 85.7615]];
+// var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
+//     imageBounds = [[40.712216, -74.22655], [40.773941, -74.12544]];
+  var imageLayer = L.imageOverlay(imageUrl, imageBounds);//.addTo(map);
 
 var baseMaps = {
   //"OpenTopoMap": OpenTopoMap
@@ -233,9 +237,9 @@ var overlaysTree = {
         { label: 'Sub Sub Catchment', layer: subsubCatchment },
         { label: 'Waterbody', layer: waterbody },
         { label: 'Major Catchment', layer: majarCatchment },
-        { label: 'OSM', layer:o_std},
-        { label: 'GSI Pale', layer:t_pale},
-        { label: 'GSI Ort', layer:t_ort}
+        { label: 'OSM', layer: o_std },
+        { label: 'GSI Pale', layer: t_pale },
+        { label: 'GSI Ort', layer: imageLayer }
       ]
     }
 
@@ -245,7 +249,7 @@ var overlaysTree = {
 if (window.matchMedia("(max-width: 767px)").matches) {
   L.control.layers.tree(baseMaps, overlaysTree).addTo(map);
 } else {
-  L.control.layers.tree(baseMaps, overlaysTree, { autoZIndex:true, sortLayers:false, collapsed: false, position: 'topright' }).addTo(map);
+  L.control.layers.tree(baseMaps, overlaysTree, { autoZIndex: true, sortLayers: false, collapsed: false, position: 'topright' }).addTo(map);
 }
 
 
@@ -335,7 +339,7 @@ function configureDams() {
       + "<b>Dam Type: </b>" + layer.feature.properties.Dam_Type + "<br>"
       + "<b>Gross Storage: </b>" + layer.feature.properties.Gross__Sto + "<br>"
       + "<b>Purpose: </b>" + layer.feature.properties.Purpose + "<br>"
-      + "<a target='_blank' href='chart.html?id=" + layer.feature.properties.UID+"&name="+ encodeURIComponent(layer.feature.properties.Name) + "'>Time Series Visualization</a>"
+      + "<a target='_blank' href='chart.html?id=" + layer.feature.properties.UID + "&name=" + encodeURIComponent(layer.feature.properties.Name) + "'>Time Series Visualization</a>"
       + '</p>';
   });
   dams.addTo(map);
@@ -629,14 +633,34 @@ map.addControl(new L.Control.Fullscreen({
 const Map_AddLayer = {
   'OSM': o_std,
   'GSI Pale': t_pale,
-  'GSI Ort': t_ort,
+  'GSI Ort': imageLayer,
 };
 
 //OpacityControl
 L.control
-    .opacity(Map_AddLayer, {
-        collapsed:true,
-        label: 'Layers Opacity',
-        position: 'bottomleft'
-    })
-    .addTo(map);
+  .opacity(Map_AddLayer, {
+    collapsed: true,
+    //label: 'Layers Opacity',
+    position: 'bottomleft'
+  })
+  .addTo(map);
+
+// polylineMeasure
+// L.control.polylineMeasure({
+//   showClearControl: true,
+//   showBearings: true,
+//   showUnitControl: true
+// }).addTo(map);
+
+// To add measure control
+// var measureControl = L.control.measure({
+//   position: 'topleft',
+//   primaryLengthUnit: 'meters',
+//   //secondaryLengthUnit: 'meters',
+//   primaryAreaUnit: 'hectares',
+//   //secondaryAreaUnit: 'sqmeters',
+//   activeColor: '#FF0000',
+//   completedColor: '#FF0000'
+// });
+// measureControl.addTo(map);
+
