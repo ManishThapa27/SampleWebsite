@@ -77,7 +77,7 @@ var osmGeocoder = new L.Control.OSMGeocoder({ placeholder: 'Search location...' 
 
 map.addControl(osmGeocoder);
 
-var imageUrl = 'image/Dindori.png',
+var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',//'image/Dindori.png',
   imageBounds = [[19.9734, 73.6569], [24.38985, 85.7615]];
 // var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
 //     imageBounds = [[40.712216, -74.22655], [40.773941, -74.12544]];
@@ -646,21 +646,21 @@ L.control
   .addTo(map);
 
 // polylineMeasure
-// L.control.polylineMeasure({
-//   showClearControl: true,
-//   showBearings: true,
-//   showUnitControl: true
-// }).addTo(map);
+L.control.polylineMeasure({
+  showClearControl: true,
+  showBearings: true,
+  showUnitControl: true
+}).addTo(map);
 
 // To add measure control
-// var measureControl = L.control.measure({
-//   position: 'topleft',
-//   primaryLengthUnit: 'meters',
-//   //secondaryLengthUnit: 'meters',
-//   primaryAreaUnit: 'hectares',
-//   //secondaryAreaUnit: 'sqmeters',
-//   activeColor: '#FF0000',
-//   completedColor: '#FF0000'
-// });
-// measureControl.addTo(map);
+var measureControl = L.control.measure({
+  position: 'topleft',
+  primaryLengthUnit: 'meters',
+  //secondaryLengthUnit: 'meters',
+  primaryAreaUnit: 'hectares',
+  //secondaryAreaUnit: 'sqmeters',
+  activeColor: '#FF0000',
+  completedColor: '#FF0000'
+});
+measureControl.addTo(map);
 
