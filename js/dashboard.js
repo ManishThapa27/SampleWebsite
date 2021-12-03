@@ -70,6 +70,10 @@ var OpenTopoMap = L.tileLayer.provider("OpenTopoMap", {
 });
 
 OpenTopoMap.addTo(map)
+
+// Grouping layers
+var Basemaps = L.layerGroup([o_std, t_pale, t_ort, OpenTopoMap]);
+
 // Remove leaflet from attribution
 map.attributionControl.setPrefix('')
 
@@ -84,7 +88,31 @@ var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',//
   var imageLayer = L.imageOverlay(imageUrl, imageBounds);//.addTo(map);
 
 var baseMaps = {
-  //"OpenTopoMap": OpenTopoMap
+  label: 'Base layers',
+  children: [
+      // { label: 'Basemaps', layer: Basemaps },
+      { label: 'OpenTopoMap', layer: OpenTopoMap },
+      { label: 'OpenStreetMap.Mapnik', layer: L.tileLayer.provider("OpenStreetMap.Mapnik", {
+        maxZoom: 17,
+        attribution: '&copy; OpenStreetMap contributors, <a href="https://opentopomap.org">OpenTopoMap</a>'
+      })},
+      { label: 'CyclOSM', layer: L.tileLayer.provider("CyclOSM", {
+        maxZoom: 17,
+        attribution: '&copy; OpenStreetMap contributors, <a href="https://opentopomap.org">OpenTopoMap</a>'
+      })},
+      { label: 'Esri.WorldTopoMap', layer: L.tileLayer.provider("Esri.WorldTopoMap", {
+        maxZoom: 17,
+        attribution: '&copy; OpenStreetMap contributors, <a href="https://opentopomap.org">OpenTopoMap</a>'
+      })},
+      { label: 'Esri.WorldImagery', layer: L.tileLayer.provider("Esri.WorldImagery", {
+        maxZoom: 17,
+        attribution: '&copy; OpenStreetMap contributors, <a href="https://opentopomap.org">OpenTopoMap</a>'
+      })},
+      { label: 'Esri.WorldGrayCanvas', layer: L.tileLayer.provider("Esri.WorldGrayCanvas", {
+        maxZoom: 17,
+        attribution: '&copy; OpenStreetMap contributors, <a href="https://opentopomap.org">OpenTopoMap</a>'
+      })},
+  ]
 };
 // var baseMaps = {
 //   "Grayscale": grayscale,
@@ -237,9 +265,10 @@ var overlaysTree = {
         { label: 'Sub Sub Catchment', layer: subsubCatchment },
         { label: 'Waterbody', layer: waterbody },
         { label: 'Major Catchment', layer: majarCatchment },
-        { label: 'OSM', layer: o_std },
-        { label: 'GSI Pale', layer: t_pale },
-        { label: 'GSI Ort', layer: imageLayer }
+        // { label: 'OSM', layer: o_std },
+        // { label: 'GSI Pale', layer: t_pale },
+        // { label: 'GSI Ort', layer: imageLayer }
+        { label: 'Basemaps', layer: Basemaps}
       ]
     }
 
@@ -623,10 +652,10 @@ map.addControl(new L.Control.Fullscreen({
 }));
 
 // add the weather control
-// L.control.weather({
-//   lang: "es",
-//   units: "metric"
-// }).addTo(map);
+L.control.weather({
+  lang: "es",
+  units: "metric"
+}).addTo(map);
 
 
 //AddLayer
@@ -663,4 +692,35 @@ var measureControl = L.control.measure({
   completedColor: '#FF0000'
 });
 measureControl.addTo(map);
+
+var table;
+map.on('overlayadd', function(e) {
+  //console.log(e);
+  var objectOut = e.layer.toGeoJSON();
+  // var tableData = JSON.stringify(objectOut);
+  var tableData = [
+    {id:1, name:"Billy Bob", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1},
+    {id:2, name:"Mary May", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true},
+    {id:3, name:"Christine Lobowski", age:"42", height:0, col:"green", dob:"22/05/1982", cheese:"true"},
+    {id:4, name:"Brendon Philips", age:"125", gender:"male", height:1, col:"orange", dob:"01/08/1980"},
+    {id:5, name:"Margret Marmajuke", age:"16", gender:"female", height:5, col:"yellow", dob:"31/01/1999"},
+    {id:6, name:"Billy Bob", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1},
+    {id:7, name:"Mary May", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true},
+    {id:8, name:"Christine Lobowski", age:"42", height:0, col:"green", dob:"22/05/1982", cheese:"true"},
+    {id:9, name:"Brendon Philips", age:"125", gender:"male", height:1, col:"orange", dob:"01/08/1980"},
+    {id:10, name:"Margret Marmajuke", age:"16", gender:"female", height:5, col:"yellow", dob:"31/01/1999"},
+];
+	//console.log(tableData);
+  //initialize table
+//   table = new Tabulator("#example-table", {
+//   data:tableData, //assign data to table
+//   autoColumns:true, //create columns from data field names
+// });
+});
+map.on('overlayremove', function(e) {
+	//console.log(e);
+  var objectOut = e.layer.toGeoJSON();
+  var textOut = JSON.stringify(objectOut);
+	console.log(textOut);
+});
 
